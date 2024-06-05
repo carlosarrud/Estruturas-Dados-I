@@ -1,326 +1,275 @@
-algoritmo "CARL SPEEDBILES"
-var
-   usuario: caractere
-   senhac: inteiro
-   senhal: inteiro
-   test: caractere
-   nome: caractere
-   a: inteiro
-   q, q1, q2, q3, q4, q5: inteiro
-   v, v1, v2, v3, v4, v5, vf: real
-   m: inteiro
-   t: real
-   contador: inteiro
-   cupom: inteiro
-   desconto, resultado: real
+#include <stdio.h>
+#include <string.h>
+#include <stdbool.h>
+#include <stdlib.h>
+#include <time.h>
 
-procedimento cadastro ()
-inicio
-mudacor ("azul", "frente")
-escreval ("============================")
-escrevAl ("CADASTRO NA CARL SPEEDBILES")
-escreval ("============================")
-escreval (" ")
-ESCREVA ("Crie seu usuário: ")
-leia (usuario)
-escreval ("  ")
-escreva ("Crie uma senha (Usar somente números):")
-leia (senhac)
-escreval ("  ")
-escreval ("Cadastro Aprovado!")
-escreval ("  ")
-escreval ("Digite qualquer tecla para continuar")
-escreval ("__________________________________")
-leia (test)
-limpatela
-fimprocedimento
+// Função para limpar a tela do console (funciona em sistemas Unix e Windows)
+void limparTela() {
+    system("clear || cls");
+}
 
-procedimento login ()
-inicio
-mudacor ("verde", "frente")
-escreval ("============================")
-escreval (" LOGIN NA CARL SPEEDBILES")
-escreval ("============================")
-escreval ("  ")
-escreva ("Informe seu nome de usuário: ")
-leia (nome)
-se nome <> usuario entao
-   repita
-      escreval ("Usuário não encontrado.")
-      escreva ("Informe seu nome de usuário novamente: ")
-      leia (nome)
-   ate nome = usuario
-fimse
-escreval ("  ")
-escreva ("Informe sua senha: ")
-leia (senhal)
-se senhal <> senhac entao
-   repita
-      escreval ("Senha incorreta.")
-      escreva ("Informe sua senha novamente: ")
-      leia (senhal)
-   ate senhal = senhac
-fimse
-escreval ("  ")
-escreval ("Login Realizado com Sucesso!")
-escreval ("  ")
-escreval ("Digite qualquer tecla para continuar.")
-escreval ("__________________________________")
-leia (test)
-limpatela
+// Estrutura para armazenar informações do usuário
+typedef struct {
+    char nome[50];
+    char email[100];
+    char senha[50];
+} Usuario;
 
-fimprocedimento
+// Estrutura para representar uma moto na loja
+typedef struct {
+    char nome[50];
+    double preco;
+    int quantidade;
+} Moto;
 
-procedimento menu ()
-inicio
-mudacor ("azul", "frente")
-mudacor ("preto", "fundos")
-escreval ("CUPOM ESPECIAL: Você tera 15% de desconto em compras com o valor acima de R$ 70.000,00")
-escreval ("__________________________________")
-escreval ("1 - HONDA CB 1000R ABS")
-escreval ("R$ 78.870")
-escreval ("Moto 0km, Ano 2022/2023, com entrega Gratis em todo o territorio Nacional ")
-escreval ("  ")
-escreval ("2 - KAWASAKI NINJA ZX-6R KRT")
-escreval ("R$ 63.900")
-escreval ("Moto 0km, Ano 2020/2021, Com entrega Gratis em todo territorio Nacional")
-escreval ("  ")
-escreval ("3 - HONDA CB 500 X ABS")
-escreval("R$ 44.990")
-escreval ("Moto 0km, Ano 2023/2023, Com entrega Gratis em todo territorio Nacional ")
-escreval ("  ")
-escreval ("4 - HONDA BIZ 110i")
-escreval ("R$ 12.400")
-escreval ("Moto 0km, Ano 2023/2023, Entrega Apartir de R$500")
-escreval ("  ")
-escreval ("5 - HONDA NXR 160 BROS ESDD")
-escreval ("R$ 22.900")
-escreval ("Moto com 0km, Ano 2022/2023, Com entrega Gratis em todo territorio Nacional ")
-escreval ("  ")
-escreval ("6 - HONDA CG 160 TITAN")
-escreval ("R$ 20.000")
-escreval ("Moto 0km, Ano 2022/2023, Com entrega Gratis em todo territorio Nacional")
-escreval ("  ")
-escreval ("7 - Para finalizar o pedido.")
-escreval ("__________________________________")
-repita
-   escreval (" ")
-   escreval ("Faça o seu pedido: ")
-   leia (a)
+// Função para verificar a validade do e-mail
+bool validarEmail(const char *email) {
+    // Implemente a validação de e-mail adequada aqui
+    // Este é um exemplo simples que apenas verifica a presença do símbolo '@'
+    return strchr(email, '@') != NULL;
+}
 
-   escolha (a)
-   caso 1
-      escreval ("HONDA CB 1000R ABS!")
-      escreva ("Informe a quantidade: ")
-      leia (q)
-      v <- (78.870 * q)
-      escreval ("Valor total R$:", v)
-   caso 2
-      escreval ("KAWASAKI NINJA ZX-6R KRT!")
-      escreva ("Informe a quantidade: ")
-      leia (q1)
-      v1 <- (63.900 * q1)
-      escreval ("Valor total R$:", v1)
-   caso 3
-      escreval ("HONDA CB 500 X ABS!")
-      escreva ("Informe a quantidade: ")
-      leia (q2)
-      v2 <- (44.990 * q2)
-      escreval ("Valor total R$:", v2)
-   caso 4
-      escreval ("HONDA BIZ 110i!")
-      escreva ("Informe a quantidade: ")
-      leia (q3)
-      v3 <- (12.400 * q3)
-      escreval ("Valor total R$:", v3)
-   caso 5
-      escreval ("HONDA NXR 160 BROS ESDD!")
-      escreva ("Informe a quantidade: ")
-      leia (q4)
-      v4 <- (22.900* q4)
-      escreval ("Valor total R$:", v4)
-   caso 6
-      escreval ("HONDA CG 160 TITAN!")
-      escreva ("Informe a quantidade: ")
-      leia (q5)
-      v5 <- (20.000 * q5)
-      escreval ("Valor total R$:", v5)
-   caso 7
-      escreval ("Pedido Finalizado!")
-   fimescolha
-   escreval (" ")
-ate (a = 7)
+// Função para realizar login
+bool fazerLogin(Usuario *usuario) {
+    printf("Digite seu nome: ");
+    scanf("%s", usuario->nome);
 
-vf <- v + v1 + v2 + v3 + v4 + v5
+    printf("Digite seu e-mail: ");
+    scanf("%s", usuario->email);
 
-escreva ("Tecle 1 se deseja usar o CUPOM ESPECIAL.")
-escreva ("Tecle 2 se não deseja usar o CUPOM ESPECIAL.")
-leia (cupom)
-escolha (cupom)
-caso 1
-   desconto <- (vf * 15)/100
-   resultado <- (vf - desconto)
-   escreval ("Valor Final: R$", resultado)
-caso 2
-   escreval ("Valor Final: R$", vf)
-   escreval (" ")
-fimescolha
-escreval ("Digite qualquer tecla para continuar.")
-escreval ("__________________________________")
-leia (test)
-limpatela
+    printf("Digite sua senha: ");
+    scanf("%s", usuario->senha);
 
-fimprocedimento
+    if (validarEmail(usuario->email)) {
+        return true;
+    } else {
+        printf("E-mail inválido. Tente novamente.\n");
+        return false;
+    }
+}
 
-inicio
-   cadastro ()
-   login ()
-mudacor ("azul", "frente")
-mudacor ("preto", "fundos")
-escreval ("============================")
-escrevAl ("    CARL SPEEDBILES ")
-escreval ("============================")
-escreval ("  ")
-ESCREVAL ("Bem Vindo, ", usuario, "!")
-escreval ("  ")
-escreva ("Carl Speedbikes é uma loja de motocicletas de primeira linha que ")
-escreva (" oferece uma ampla seleção de motos de alta qualidade das principais ")
-escreva ("marcas. Com uma equipe apaixonada e experiente, eles fornecem ")
-escreva ("orientação personalizada para ajudar os clientes a encontrarem a ")
-escreva ("motocicleta perfeita para suas necessidades. Sua oficina de última ")
-escreva ("geração garante manutenção e reparos de primeira classe. Na Carl ")
-escreva ("Speedbikes, a emoção da velocidade e a liberdade da estrada se  ")
-escreva ("unem para criar uma experiência inesquecível para os entusiastas de ")
-escreva ("motocicletas de todos os níveis. ")
-escreval ("  ")
-escreval ("CUPOM ESPECIAL: Você tera 15% de desconto em compras com o valor acima de R$ 70.000,00")
-escreval ("__________________________________")
-escreval ("1 - HONDA CB 1000R ABS")
-escreval ("R$ 78.870")
-escreval ("Moto 0km, Ano 2022/2023, com entrega Gratis em todo o territorio Nacional ")
-escreval ("  ")
-escreval ("2 - KAWASAKI NINJA ZX-6R KRT")
-escreval ("R$ 63.900")
-escreval ("Moto 0km, Ano 2020/2021, Com entrega Gratis em todo territorio Nacional")
-escreval ("  ")
-escreval ("3 - HONDA CB 500 X ABS")
-escreval("R$ 44.990")
-escreval ("Moto 0km, Ano 2023/2023, Com entrega Gratis em todo territorio Nacional ")
-escreval ("  ")
-escreval ("4 - HONDA BIZ 110i")
-escreval ("R$ 12.400")
-escreval ("Moto 0km, Ano 2023/2023, Entrega Apartir de R$500")
-escreval ("  ")
-escreval ("5 - HONDA NXR 160 BROS ESDD")
-escreval ("R$ 22.900")
-escreval ("Moto com 0km, Ano 2022/2023, Com entrega Gratis em todo territorio Nacional ")
-escreval ("  ")
-escreval ("6 - HONDA CG 160 TITAN")
-escreval ("R$ 20.000")
-escreval ("Moto 0km, Ano 2022/2023, Com entrega Gratis em todo territorio Nacional")
-escreval ("  ")
-escreval ("7 - Para finalizar o pedido.")
-escreval ("__________________________________")
+// Função para mostrar o menu de opções
+void mostrarMenu(bool isAdmin) {
+    printf("\nOpções:\n");
+    printf("1. Catálogo de motos\n");
+    printf("2. Sorteio\n");
+    if (isAdmin) {
+        printf("5. Gerenciar Catálogo\n"); // Alterada para "Gerenciar Catálogo"
+        printf("6. Adicionar motos no catálogo\n");
+        printf("7. Excluir motos do catálogo\n");
+    }
+    printf("3. Central de Ajuda\n");
+    printf("4. Sair\n");
+}
 
-repita
-   escreval (" ")
-   escreval ("Faça o seu pedido: ")
-   leia (a)
+// Função para apresentar mensagem de boas-vindas
+void mensagemBoasVindas(const Usuario *usuario, bool isAdmin) {
+    printf("\nBem-vindo, %s!\n", usuario->nome);
+    if (isAdmin) {
+        printf("Você está logado como Administrador.\n");
+    }
+    printf("Seu e-mail (%s) foi verificado com sucesso.\n", usuario->email);
+    printf("Aproveite suas compras na CARL_SPEEDBIKES!\n");
+}
 
-   escolha (a)
-   caso 1
-      escreval ("HONDA CB 1000R ABS!")
-      escreva ("Informe a quantidade: ")
-      leia (q)
-      v <- (78.87 * q)
-      escreval ("Valor total R$:", v)
-   caso 2
-      escreval ("KAWASAKI NINJA ZX-6R KRT!")
-      escreva ("Informe a quantidade: ")
-      leia (q1)
-      v1 <- (63.90 * q1)
-      escreval ("Valor total R$:", v1)
-   caso 3
-      escreval ("HONDA CB 500 X ABS!")
-      escreva ("Informe a quantidade: ")
-      leia (q2)
-      v2 <- (44.99 * q2)
-      escreval ("Valor total R$:", v2)
-   caso 4
-      escreval ("HONDA BIZ 110i!")
-      escreva ("Informe a quantidade: ")
-      leia (q3)
-      v3 <- (12.40 * q3)
-      escreval ("Valor total R$:", v3)
-   caso 5
-      escreval ("HONDA NXR 160 BROS ESDD!")
-      escreva ("Informe a quantidade: ")
-      leia (q4)
-      v4 <- (22.90 * q4)
-      escreval ("Valor total R$:", v4)
-   caso 6
-      escreval ("HONDA CG 160 TITAN!")
-      escreva ("Informe a quantidade: ")
-      leia (q5)
-      v5 <- (20.00 * q5)
-      escreval ("Valor total R$:", v5)
-   caso 7
-      escreval ("Pedido Finalizado!")
-   fimescolha
-   escreval ("  ")
+// Função para realizar vendas de motos
+void venderMoto(Moto *loja, int tamanhoLoja) {
+    if (tamanhoLoja == 0) {
+        printf("A loja não tem motos disponíveis para venda no momento.\n");
+        return;
+    }
 
-ate (a = 7)
+    printf("\nCatálogo de Motos Disponíveis:\n");
+    printf("%-3s %-20s %-15s %-10s\n", "ID", "Nome", "Preço (R$)", "Quantidade");
+    for (int i = 0; i < tamanhoLoja; i++) {
+        printf("%-3d %-20s %-15.2lf %-10d\n", i + 1, loja[i].nome, loja[i].preco, loja[i].quantidade);
+    }
 
-vf <- v + v1 + v2 + v3 + v4 + v5
+    int escolha;
+    printf("Digite o ID da moto que deseja comprar (1-%d) ou 0 para voltar: ", tamanhoLoja);
+    scanf("%d", &escolha);
 
-escreva ("Tecle 1 se deseja usar o CUPOM ESPECIAL.")
-escreva ("Tecle 2 se não deseja usar o CUPOM ESPECIAL.")
-leia (cupom)
-escolha (cupom)
-caso 1
-   desconto <- (vf * 15)/100
-   resultado <- (vf - desconto)
-   escreval ("Valor Final: R$", resultado)
-caso 2
-   escreval ("Valor Final: R$", vf)
-fimescolha
-escreval (" ")
-escreval ("Digite qualquer tecla para continuar.")
-escreval ("__________________________________")
-leia (test)
-limpatela
-repita
-mudacor ("preto", "fundos")
-mudacor ("azul", "frente")
-escreval ("Tecle 1: Para abrir o menu novamente.")
-escreval ("Tecle 2: Para abrir o login novamente.")
-escreval ("Tecle 3: Para abrir o cadastro novamnete.")
-escreval ("Tecle 4: Para encerrar o programa.")
-leia (m)
-limpatela
+    if (escolha >= 1 && escolha <= tamanhoLoja) {
+        int quantidade;
+        printf("Digite a quantidade desejada: ");
+        scanf("%d", &quantidade);
 
-se m = 4 entao
-   escreval ("Obrigado por comprar na CARL SPEEDBILES!")
-   escreval ("  ")
-   escreval ("Digite qualquer tecla para continuar.")
-   escreval ("__________________________________")
-   leia (test)
-   limpatela
-fimse
-limpatela
-se m = 1 entao
-   menu ()
-fimse
-limpatela
-se m = 2 entao
-   login
-fimse
-limpatela
-se m = 3 entao
-   cadastro ()
-fimse
-limpatela
-ate m = 4
+        if (quantidade <= 0 || quantidade > loja[escolha - 1].quantidade) {
+            printf("Quantidade inválida. A compra não pode ser realizada.\n");
+        } else {
+            double valorUnitario = loja[escolha - 1].preco;
+            double valorTotal = valorUnitario * quantidade * 0.9; // Aplica o desconto de 10%
+            
+            printf("Valor total da compra (com 10%% de desconto): R$%.2lf\n", valorTotal);
+            printf("Desconto de 10%% aplicado com sucesso!\n"); // Mensagem de desconto aplicado
+            printf("Compra realizada com sucesso. Obrigado!\n");
+
+            // Atualize a quantidade de motos disponíveis no catálogo
+            loja[escolha - 1].quantidade -= quantidade;
+        }
+    } else if (escolha == 0) {
+        printf("Voltando ao menu inicial...\n");
+    } else {
+        printf("Opção inválida. Tente novamente.\n");
+    }
+}
+
+// Função para realizar um sorteio com número máximo 20
+void realizarSorteio() {
+    int numeroMaximo = 20;
+    int numeroCliente;
+    int numeroSorteado;
+
+    printf("\nDigite o seu número de cliente (1-20): ");
+    scanf("%d", &numeroCliente);
+
+    if (numeroCliente < 1 || numeroCliente > numeroMaximo) {
+        printf("Número de cliente inválido. Deve estar entre 1 e 20.\n");
+        return;
+    }
+
+    numeroSorteado = rand() % numeroMaximo + 1;
+
+    printf("Sorteio realizado! O número sorteado é: %d\n", numeroSorteado);
+
+    if (numeroCliente == numeroSorteado) {
+        printf("Parabéns! Você é o cliente sorteado!\n");
+    } else {
+        printf("Infelizmente, você não foi o cliente sorteado desta vez. Tente novamente na próxima!\n");
+    }
+}
+
+// Função para adicionar motos à loja
+void adicionarMotos(Moto *loja, int *tamanhoLoja) {
+    // Implementação da função de adição de motos
+}
+
+// Função para excluir motos do catálogo
+void excluirMotos(Moto *loja, int *tamanhoLoja) {
+    // Implementação da função de exclusão de motos
+}
+
+// Função para acessar o Local ADM (Administrador)
+void acessarLocalADM(Moto *loja, int *tamanhoLoja) {
+    // Implementação da função do Local ADM
+}
+
+int main() {
+    Usuario usuario;
+    bool logado = false;
+    bool isAdmin = false; // Define se o usuário é o administrador
+
+    printf("### Bem-vindo à CARL_SPEEDBIKES ###\n");
+
+    while (!logado) {
+        logado = fazerLogin(&usuario);
+    }
+
+    // Verificar se o usuário é o administrador (substitua pelo seu critério)
+    if (strcmp(usuario.email, "admin@example.com") == 0) {
+        isAdmin = true;
+    }
+
+    mensagemBoasVindas(&usuario, isAdmin); // Mostrar a mensagem de boas-vindas
+
+    int escolha;
+    srand(time(NULL));
+
+    Moto loja[10]; // Capacidade máxima de 10 motos na loja
+    int tamanhoLoja = 0; // Quantidade atual de motos na loja
+
+    // Adicionei algumas motos fictícias ao catálogo
+    strcpy(loja[tamanhoLoja].nome, "Pop 100");
+    loja[tamanhoLoja].preco = 10000.0;
+    loja[tamanhoLoja].quantidade = 5;
+    tamanhoLoja++;
+
+    strcpy(loja[tamanhoLoja].nome, "Honda 125");
+    loja[tamanhoLoja].preco = 8000.0;
+    loja[tamanhoLoja].quantidade = 3;
+    tamanhoLoja++;
+
+    strcpy(loja[tamanhoLoja].nome, "Honda 150");
+    loja[tamanhoLoja].preco = 12000.0;
+    loja[tamanhoLoja].quantidade = 7;
+    tamanhoLoja++;
+
+    strcpy(loja[tamanhoLoja].nome, "Biz 125");
+    loja[tamanhoLoja].preco = 9000.0;
+    loja[tamanhoLoja].quantidade = 2;
+    tamanhoLoja++;
+
+    strcpy(loja[tamanhoLoja].nome, "CB 500");
+    loja[tamanhoLoja].preco = 11000.0;
+    loja[tamanhoLoja].quantidade = 4;
+    tamanhoLoja++;
+
+    strcpy(loja[tamanhoLoja].nome, "Biz 110i");
+    loja[tamanhoLoja].preco = 9500.0;
+    loja[tamanhoLoja].quantidade = 8;
+    tamanhoLoja++;
+
+    strcpy(loja[tamanhoLoja].nome, "Honda ADV");
+    loja[tamanhoLoja].preco = 10500.0;
+    loja[tamanhoLoja].quantidade = 6;
+    tamanhoLoja++;
+
+    do {
+        mostrarMenu(isAdmin); // Mostrar o menu após a mensagem de boas-vindas
+        printf("Escolha uma opção (1/2");
+        if (isAdmin) {
+            printf("/5/6/7");
+        }
+        printf("/3/4): ");
+        scanf("%d", &escolha);
+
+        switch (escolha) {
+            case 1:
+                venderMoto(loja, tamanhoLoja);
+                break;
+            case 2:
+                realizarSorteio();
+                break;
+            case 5:
+                if (isAdmin) {
+                    acessarLocalADM(loja, &tamanhoLoja);
+                } else {
+                    printf("Opção inválida. Tente novamente.\n");
+                }
+                break;
+            case 6:
+                if (isAdmin) {
+                    adicionarMotos(loja, &tamanhoLoja);
+                } else {
+                    printf("Opção inválida. Tente novamente.\n");
+                }
+                break;
+            case 7:
+                if (isAdmin) {
+                    excluirMotos(loja, &tamanhoLoja);
+                } else {
+                    printf("Opção inválida. Tente novamente.\n");
+                }
+                break;
+            case 3:
+                printf("Central de Ajuda - Entre em contato com o suporte para obter assistência.\n");
+                break;
+            case 4:
+                printf("Saindo...\n");
+                break;
+            default:
+                printf("Opção inválida. Tente novamente.\n");
+        }
+
+        printf("\nPressione Enter para continuar...");
+        getchar(); // Aguarda que o usuário pressione Enter
+        getchar(); // Aguarda novamente para evitar que a leitura do Enter seja usada na próxima entrada
+        limparTela(); // Limpa a tela do console
+    } while (escolha != 4);
+
+    return 0;
+}
 
 
-fimalgoritmo
+Acesse ao Menu ADM com o seguinte Email "admin@example.com"
