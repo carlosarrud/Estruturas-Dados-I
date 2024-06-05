@@ -1,0 +1,326 @@
+algoritmo "CARL SPEEDBILES"
+var
+   usuario: caractere
+   senhac: inteiro
+   senhal: inteiro
+   test: caractere
+   nome: caractere
+   a: inteiro
+   q, q1, q2, q3, q4, q5: inteiro
+   v, v1, v2, v3, v4, v5, vf: real
+   m: inteiro
+   t: real
+   contador: inteiro
+   cupom: inteiro
+   desconto, resultado: real
+
+procedimento cadastro ()
+inicio
+mudacor ("azul", "frente")
+escreval ("============================")
+escrevAl ("CADASTRO NA CARL SPEEDBILES")
+escreval ("============================")
+escreval (" ")
+ESCREVA ("Crie seu usuário: ")
+leia (usuario)
+escreval ("  ")
+escreva ("Crie uma senha (Usar somente números):")
+leia (senhac)
+escreval ("  ")
+escreval ("Cadastro Aprovado!")
+escreval ("  ")
+escreval ("Digite qualquer tecla para continuar")
+escreval ("__________________________________")
+leia (test)
+limpatela
+fimprocedimento
+
+procedimento login ()
+inicio
+mudacor ("verde", "frente")
+escreval ("============================")
+escreval (" LOGIN NA CARL SPEEDBILES")
+escreval ("============================")
+escreval ("  ")
+escreva ("Informe seu nome de usuário: ")
+leia (nome)
+se nome <> usuario entao
+   repita
+      escreval ("Usuário não encontrado.")
+      escreva ("Informe seu nome de usuário novamente: ")
+      leia (nome)
+   ate nome = usuario
+fimse
+escreval ("  ")
+escreva ("Informe sua senha: ")
+leia (senhal)
+se senhal <> senhac entao
+   repita
+      escreval ("Senha incorreta.")
+      escreva ("Informe sua senha novamente: ")
+      leia (senhal)
+   ate senhal = senhac
+fimse
+escreval ("  ")
+escreval ("Login Realizado com Sucesso!")
+escreval ("  ")
+escreval ("Digite qualquer tecla para continuar.")
+escreval ("__________________________________")
+leia (test)
+limpatela
+
+fimprocedimento
+
+procedimento menu ()
+inicio
+mudacor ("azul", "frente")
+mudacor ("preto", "fundos")
+escreval ("CUPOM ESPECIAL: Você tera 15% de desconto em compras com o valor acima de R$ 70.000,00")
+escreval ("__________________________________")
+escreval ("1 - HONDA CB 1000R ABS")
+escreval ("R$ 78.870")
+escreval ("Moto 0km, Ano 2022/2023, com entrega Gratis em todo o territorio Nacional ")
+escreval ("  ")
+escreval ("2 - KAWASAKI NINJA ZX-6R KRT")
+escreval ("R$ 63.900")
+escreval ("Moto 0km, Ano 2020/2021, Com entrega Gratis em todo territorio Nacional")
+escreval ("  ")
+escreval ("3 - HONDA CB 500 X ABS")
+escreval("R$ 44.990")
+escreval ("Moto 0km, Ano 2023/2023, Com entrega Gratis em todo territorio Nacional ")
+escreval ("  ")
+escreval ("4 - HONDA BIZ 110i")
+escreval ("R$ 12.400")
+escreval ("Moto 0km, Ano 2023/2023, Entrega Apartir de R$500")
+escreval ("  ")
+escreval ("5 - HONDA NXR 160 BROS ESDD")
+escreval ("R$ 22.900")
+escreval ("Moto com 0km, Ano 2022/2023, Com entrega Gratis em todo territorio Nacional ")
+escreval ("  ")
+escreval ("6 - HONDA CG 160 TITAN")
+escreval ("R$ 20.000")
+escreval ("Moto 0km, Ano 2022/2023, Com entrega Gratis em todo territorio Nacional")
+escreval ("  ")
+escreval ("7 - Para finalizar o pedido.")
+escreval ("__________________________________")
+repita
+   escreval (" ")
+   escreval ("Faça o seu pedido: ")
+   leia (a)
+
+   escolha (a)
+   caso 1
+      escreval ("HONDA CB 1000R ABS!")
+      escreva ("Informe a quantidade: ")
+      leia (q)
+      v <- (78.870 * q)
+      escreval ("Valor total R$:", v)
+   caso 2
+      escreval ("KAWASAKI NINJA ZX-6R KRT!")
+      escreva ("Informe a quantidade: ")
+      leia (q1)
+      v1 <- (63.900 * q1)
+      escreval ("Valor total R$:", v1)
+   caso 3
+      escreval ("HONDA CB 500 X ABS!")
+      escreva ("Informe a quantidade: ")
+      leia (q2)
+      v2 <- (44.990 * q2)
+      escreval ("Valor total R$:", v2)
+   caso 4
+      escreval ("HONDA BIZ 110i!")
+      escreva ("Informe a quantidade: ")
+      leia (q3)
+      v3 <- (12.400 * q3)
+      escreval ("Valor total R$:", v3)
+   caso 5
+      escreval ("HONDA NXR 160 BROS ESDD!")
+      escreva ("Informe a quantidade: ")
+      leia (q4)
+      v4 <- (22.900* q4)
+      escreval ("Valor total R$:", v4)
+   caso 6
+      escreval ("HONDA CG 160 TITAN!")
+      escreva ("Informe a quantidade: ")
+      leia (q5)
+      v5 <- (20.000 * q5)
+      escreval ("Valor total R$:", v5)
+   caso 7
+      escreval ("Pedido Finalizado!")
+   fimescolha
+   escreval (" ")
+ate (a = 7)
+
+vf <- v + v1 + v2 + v3 + v4 + v5
+
+escreva ("Tecle 1 se deseja usar o CUPOM ESPECIAL.")
+escreva ("Tecle 2 se não deseja usar o CUPOM ESPECIAL.")
+leia (cupom)
+escolha (cupom)
+caso 1
+   desconto <- (vf * 15)/100
+   resultado <- (vf - desconto)
+   escreval ("Valor Final: R$", resultado)
+caso 2
+   escreval ("Valor Final: R$", vf)
+   escreval (" ")
+fimescolha
+escreval ("Digite qualquer tecla para continuar.")
+escreval ("__________________________________")
+leia (test)
+limpatela
+
+fimprocedimento
+
+inicio
+   cadastro ()
+   login ()
+mudacor ("azul", "frente")
+mudacor ("preto", "fundos")
+escreval ("============================")
+escrevAl ("    CARL SPEEDBILES ")
+escreval ("============================")
+escreval ("  ")
+ESCREVAL ("Bem Vindo, ", usuario, "!")
+escreval ("  ")
+escreva ("Carl Speedbikes é uma loja de motocicletas de primeira linha que ")
+escreva (" oferece uma ampla seleção de motos de alta qualidade das principais ")
+escreva ("marcas. Com uma equipe apaixonada e experiente, eles fornecem ")
+escreva ("orientação personalizada para ajudar os clientes a encontrarem a ")
+escreva ("motocicleta perfeita para suas necessidades. Sua oficina de última ")
+escreva ("geração garante manutenção e reparos de primeira classe. Na Carl ")
+escreva ("Speedbikes, a emoção da velocidade e a liberdade da estrada se  ")
+escreva ("unem para criar uma experiência inesquecível para os entusiastas de ")
+escreva ("motocicletas de todos os níveis. ")
+escreval ("  ")
+escreval ("CUPOM ESPECIAL: Você tera 15% de desconto em compras com o valor acima de R$ 70.000,00")
+escreval ("__________________________________")
+escreval ("1 - HONDA CB 1000R ABS")
+escreval ("R$ 78.870")
+escreval ("Moto 0km, Ano 2022/2023, com entrega Gratis em todo o territorio Nacional ")
+escreval ("  ")
+escreval ("2 - KAWASAKI NINJA ZX-6R KRT")
+escreval ("R$ 63.900")
+escreval ("Moto 0km, Ano 2020/2021, Com entrega Gratis em todo territorio Nacional")
+escreval ("  ")
+escreval ("3 - HONDA CB 500 X ABS")
+escreval("R$ 44.990")
+escreval ("Moto 0km, Ano 2023/2023, Com entrega Gratis em todo territorio Nacional ")
+escreval ("  ")
+escreval ("4 - HONDA BIZ 110i")
+escreval ("R$ 12.400")
+escreval ("Moto 0km, Ano 2023/2023, Entrega Apartir de R$500")
+escreval ("  ")
+escreval ("5 - HONDA NXR 160 BROS ESDD")
+escreval ("R$ 22.900")
+escreval ("Moto com 0km, Ano 2022/2023, Com entrega Gratis em todo territorio Nacional ")
+escreval ("  ")
+escreval ("6 - HONDA CG 160 TITAN")
+escreval ("R$ 20.000")
+escreval ("Moto 0km, Ano 2022/2023, Com entrega Gratis em todo territorio Nacional")
+escreval ("  ")
+escreval ("7 - Para finalizar o pedido.")
+escreval ("__________________________________")
+
+repita
+   escreval (" ")
+   escreval ("Faça o seu pedido: ")
+   leia (a)
+
+   escolha (a)
+   caso 1
+      escreval ("HONDA CB 1000R ABS!")
+      escreva ("Informe a quantidade: ")
+      leia (q)
+      v <- (78.87 * q)
+      escreval ("Valor total R$:", v)
+   caso 2
+      escreval ("KAWASAKI NINJA ZX-6R KRT!")
+      escreva ("Informe a quantidade: ")
+      leia (q1)
+      v1 <- (63.90 * q1)
+      escreval ("Valor total R$:", v1)
+   caso 3
+      escreval ("HONDA CB 500 X ABS!")
+      escreva ("Informe a quantidade: ")
+      leia (q2)
+      v2 <- (44.99 * q2)
+      escreval ("Valor total R$:", v2)
+   caso 4
+      escreval ("HONDA BIZ 110i!")
+      escreva ("Informe a quantidade: ")
+      leia (q3)
+      v3 <- (12.40 * q3)
+      escreval ("Valor total R$:", v3)
+   caso 5
+      escreval ("HONDA NXR 160 BROS ESDD!")
+      escreva ("Informe a quantidade: ")
+      leia (q4)
+      v4 <- (22.90 * q4)
+      escreval ("Valor total R$:", v4)
+   caso 6
+      escreval ("HONDA CG 160 TITAN!")
+      escreva ("Informe a quantidade: ")
+      leia (q5)
+      v5 <- (20.00 * q5)
+      escreval ("Valor total R$:", v5)
+   caso 7
+      escreval ("Pedido Finalizado!")
+   fimescolha
+   escreval ("  ")
+
+ate (a = 7)
+
+vf <- v + v1 + v2 + v3 + v4 + v5
+
+escreva ("Tecle 1 se deseja usar o CUPOM ESPECIAL.")
+escreva ("Tecle 2 se não deseja usar o CUPOM ESPECIAL.")
+leia (cupom)
+escolha (cupom)
+caso 1
+   desconto <- (vf * 15)/100
+   resultado <- (vf - desconto)
+   escreval ("Valor Final: R$", resultado)
+caso 2
+   escreval ("Valor Final: R$", vf)
+fimescolha
+escreval (" ")
+escreval ("Digite qualquer tecla para continuar.")
+escreval ("__________________________________")
+leia (test)
+limpatela
+repita
+mudacor ("preto", "fundos")
+mudacor ("azul", "frente")
+escreval ("Tecle 1: Para abrir o menu novamente.")
+escreval ("Tecle 2: Para abrir o login novamente.")
+escreval ("Tecle 3: Para abrir o cadastro novamnete.")
+escreval ("Tecle 4: Para encerrar o programa.")
+leia (m)
+limpatela
+
+se m = 4 entao
+   escreval ("Obrigado por comprar na CARL SPEEDBILES!")
+   escreval ("  ")
+   escreval ("Digite qualquer tecla para continuar.")
+   escreval ("__________________________________")
+   leia (test)
+   limpatela
+fimse
+limpatela
+se m = 1 entao
+   menu ()
+fimse
+limpatela
+se m = 2 entao
+   login
+fimse
+limpatela
+se m = 3 entao
+   cadastro ()
+fimse
+limpatela
+ate m = 4
+
+
+fimalgoritmo
