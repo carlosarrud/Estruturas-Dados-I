@@ -1,0 +1,58 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+    int linhas, colunas;
+
+    printf("Digite o número de linhas da matriz: ");
+    scanf("%d", &linhas);
+
+    printf("Digite o número de colunas da matriz: ");
+    scanf("%d", &colunas);
+
+    // Alocando memória dinamicamente para a matriz
+    int **matriz = (int **)malloc(linhas * sizeof(int *));
+    for (int i = 0; i < linhas; i++) {
+        matriz[i] = (int *)malloc(colunas * sizeof(int));
+    }
+
+    // Verificando se a alocação foi bem-sucedida
+    if (matriz == NULL) {
+        printf("Erro ao alocar memória para a matriz.\n");
+        return 1;
+    }
+
+    // Solicitando ao usuário que insira os elementos da matriz
+    printf("Digite os elementos da matriz:\n");
+    for (int i = 0; i < linhas; i++) {
+        for (int j = 0; j < colunas; j++) {
+            scanf("%d", &matriz[i][j]);
+        }
+    }
+
+    // Imprimindo a matriz na forma original
+    printf("Matriz original:\n");
+    for (int i = 0; i < linhas; i++) {
+        for (int j = 0; j < colunas; j++) {
+            printf("%d ", matriz[i][j]);
+        }
+        printf("\n");
+    }
+
+    // Imprimindo a matriz transposta
+    printf("Matriz transposta:\n");
+    for (int i = 0; i < colunas; i++) {
+        for (int j = 0; j < linhas; j++) {
+            printf("%d ", matriz[j][i]);
+        }
+        printf("\n");
+    } 
+
+    // Liberando a memória alocada para a matriz
+    for (int i = 0; i < linhas; i++) {
+        free(matriz[i]);
+    }
+    free(matriz);
+
+    return 0;
+}
