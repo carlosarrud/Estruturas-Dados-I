@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+    int num_pessoas;
+    char **nomes;
+    int *idades;
+    int i;
+
+    printf("Digite o número de pessoas: ");
+    scanf("%d", &num_pessoas);
+
+    nomes = malloc(num_pessoas * sizeof(char *));
+
+    idades = malloc(num_pessoas * sizeof(int));
+
+    for (i = 0; i < num_pessoas; i++) {
+        printf("Digite o nome completo da pessoa %d: ", i + 1);
+        
+// Aloca 100 caracteres para cada string
+nomes[i] = malloc(100 * sizeof(char)); 
+        scanf(" %[^\n]%*c", nomes[i]);
+    }
+    for (i = 0; i < num_pessoas; i++) {
+        printf("Digite a idade da pessoa %d: ", i + 1);
+        scanf("%d", &idades[i]);
+    }
+
+    printf("\nNomes das pessoas armazenadas:\n");
+    for (i = 0; i < num_pessoas; i++) {
+        printf("%s\n", nomes[i]);
+    }
+
+    for (i = 0; i < num_pessoas; i++) {
+      
+ // Libera a memória alocada para cada string
+free(nomes[i]);
+    }
+    free(nomes);
+    free(idades);
+
+    return 0;
+}
