@@ -1,0 +1,54 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define QUANTIDADE_DE_ALUNOS 5 //CONTANTE
+
+typedef struct aluno {
+    int matricula;
+    int idade;
+    char nome[20];
+} Aluno;
+
+// Função para verificar se a alocação de memória foi bem-sucedida
+void inf(void *ptr) {
+    if (ptr == NULL) {
+        printf("No memory RAM\n");
+        exit(1);
+    }
+}
+
+void preenche(Aluno *aluno, int tamanho) {
+    int cont;
+    for (cont = 0; cont < tamanho; cont++) {
+        printf("Informe seu nome: \t");
+        scanf(" %[^\n]", aluno[cont].nome);
+        printf("Informe sua matricula:\t ");
+        scanf("%d", &aluno[cont].matricula);
+        printf("Informe sua idade:\t");
+        scanf("%d", &aluno[cont].idade);
+    }
+}
+
+int main(void) {
+    Aluno *aluno = (Aluno *)malloc(QUANTIDADE_DE_ALUNOS * sizeof(Aluno));
+    inf(aluno); // Verifica se a alocação foi bem-sucedida
+
+    preenche(aluno, QUANTIDADE_DE_ALUNOS);
+
+    int novo_tamanho;
+    printf("Informe o novo tamanho de vetor: \t");
+    scanf("%d", &novo_tamanho);
+
+    aluno = (Aluno *)realloc(aluno, novo_tamanho * sizeof(Aluno));
+    inf(aluno); // Verifica se a realocação foi bem-sucedida
+
+    if (aluno != NULL) {
+        printf("Vetor realocado!\n");
+    } else {
+        printf("Erro ao realocar o vetor.\n");
+    }
+
+    // Libera a memória alocada para o array de alunos
+    free(aluno);
+
+    return 0;
+}
