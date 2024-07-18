@@ -1,0 +1,22 @@
+#include <stdio.h> 
+#define QUANTIDADE_DE_ALUNOS 5 //CONTANTE
+
+typedef struct aluno{
+    int matricula;
+    int idade;
+    char nome[20];
+
+}Aluno;
+int main(void){
+Aluno aluno [QUANTIDADE_DE_ALUNOS];
+int cont;
+for(cont=0; cont<QUANTIDADE_DE_ALUNOS; cont++){
+printf("Informe seu nome: \t");
+scanf(" %[^\n]", aluno[cont].nome);
+printf("Informe sua matricula:\t ");
+scanf("%d",&aluno[cont].matricula);
+printf("Informe sua idade:\t");
+scanf("%d", &aluno[cont].idade);
+}
+return 0;
+}
