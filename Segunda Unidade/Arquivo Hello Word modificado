@@ -1,0 +1,29 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void){
+// criando um arquivo aula01.txt
+    FILE * arquivo;
+    char texto_arquivo[100];
+    int idade;
+    arquivo = fopen("aula01.txt", "w");
+    if(arquivo==NULL){
+        printf("Can't creat file\n");
+        exit(1);
+
+    }
+    else{
+        printf("File created! \n");
+
+    }
+    // Escrevando arquivo
+    fprintf(arquivo, "Carlos\t21\n!");
+    fclose(arquivo);
+
+    // Lendo os texto do arquivo
+    arquivo = fopen("aula01.txt", "r");
+    fscanf(arquivo, "%s\t%d", texto_arquivo, &idade);
+    printf("Texto no arquivo\n Nome:%s Idade: %d\n", texto_arquivo, idade);
+    fclose(arquivo);
+    return 0;
+}
